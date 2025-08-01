@@ -93,6 +93,9 @@
                         <h3>Quick Actions</h3>
                         <div class="action-buttons">
                             <a href="mock_test_2/index.html" class="btn btn--primary">Start Mock Test 2</a>
+                            <!-- New Tests Added Below -->
+                            <a href="mock_test_3/index.html" class="btn btn--primary">Start Mock Test 3</a>
+                            <a href="mock_test_4/index.html" class="btn btn--primary">Start Mock Test 4</a>
                             <button class="btn btn--secondary" data-section="roadmap">View Study Roadmap</button>
                             <button class="btn btn--outline" data-section="results">Check Results</button>
                         </div>
@@ -129,10 +132,11 @@
                                     </ul>
                                 </div>
                                 <button class="btn btn--primary btn--lg" id="startTest">Start Test</button>
+                                <!-- If you want to add new daily mock buttons here too, you can! -->
                             </div>
                         </div>
                     </div>
-
+                    <!-- No changes here: the logic for actual test will be handled in your MockTest3.js & MockTest4.js -->
                     <div class="test-interface hidden" id="testInterface">
                         <div class="test-header">
                             <div class="test-timer">
@@ -143,7 +147,6 @@
                                 Question <span id="currentQuestion">1</span> of 20
                             </div>
                         </div>
-
                         <div class="test-content">
                             <div class="question-panel">
                                 <div class="question-info">
@@ -153,18 +156,15 @@
                                 <div class="question-text" id="questionText">
                                     Question will appear here
                                 </div>
-                                <div class="options" id="optionsContainer">
-                                    </div>
+                                <div class="options" id="optionsContainer"></div>
                                 <div class="question-actions">
                                     <button class="btn btn--secondary" id="markReview">Mark for Review</button>
                                     <button class="btn btn--outline" id="clearResponse">Clear Response</button>
                                 </div>
                             </div>
-
                             <div class="question-navigator">
                                 <h4>Question Navigator</h4>
-                                <div class="question-grid" id="questionGrid">
-                                    </div>
+                                <div class="question-grid" id="questionGrid"></div>
                                 <div class="legend">
                                     <div class="legend-item">
                                         <span class="legend-color answered"></span>
@@ -181,14 +181,12 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="test-controls">
                             <button class="btn btn--outline" id="prevQuestion">Previous</button>
                             <button class="btn btn--outline" id="nextQuestion">Next</button>
                             <button class="btn btn--primary" id="submitTest">Submit Test</button>
                         </div>
                     </div>
-
                     <div class="test-results hidden" id="testResults">
                         <div class="card">
                             <div class="card__body">
@@ -207,14 +205,10 @@
                                         <span class="result-value" id="timeTaken">00:00</span>
                                     </div>
                                 </div>
-
                                 <div class="performance-chart" style="position: relative; height: 300px;">
                                     <canvas id="performanceChart"></canvas>
                                 </div>
-
-                                <div class="solutions" id="solutions">
-                                    </div>
-
+                                <div class="solutions" id="solutions"></div>
                                 <div class="result-actions">
                                     <button class="btn btn--primary" id="retakeTest">Take Another Test</button>
                                     <button class="btn btn--secondary" data-section="results">View All Results</button>
@@ -235,9 +229,7 @@
                     </div>
                     <span class="progress-text" id="roadmapProgressText">0% Complete</span>
                 </div>
-
-                <div class="roadmap" id="roadmap">
-                    </div>
+                <div class="roadmap" id="roadmap"></div>
             </div>
         </section>
 
@@ -294,8 +286,7 @@
 
                     <div class="results-history">
                         <h3>Test History</h3>
-                        <div class="results-table" id="resultsTable">
-                            </div>
+                        <div class="results-table" id="resultsTable"></div>
                     </div>
                 </div>
             </div>
@@ -392,7 +383,9 @@
             </div>
         </div>
     </footer>
-
+    <!-- Add your JS files for new Mock Tests -->
+    <script src="MockTest3.js"></script>
+    <script src="MockTest4.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
