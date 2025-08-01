@@ -1,933 +1,360 @@
-// Application data and state
-const APP_DATA = {
-  examInfo: {
-    name: "ASRB NET 2025",
-    examDate: "2025-09-02",
-    totalQuestions: 150,
-    duration: 120,
-    negativeMarking: 0.33
-  },
-  subjects: [
-    "Agronomy",
-    "Plant Pathology", 
-    "Genetics & Plant Breeding",
-    "Plant Physiology",
-    "Soil Science",
-    "Agricultural Economics",
-    "Environmental Science",
-    "Plant Biochemistry"
-  ],
-  mockQuestions: [
-    {
-      id: 1,
-      subject: "Agronomy",
-      question: "Which of the following is the primary nutrient element required by plants in largest quantity?",
-      options: ["Nitrogen", "Phosphorus", "Potassium", "Calcium"],
-      correct: 0,
-      explanation: "Nitrogen is required by plants in the largest quantity among all nutrients. It is essential for protein synthesis, chlorophyll formation, and overall plant growth."
-    },
-    {
-      id: 2,
-      subject: "Plant Pathology",
-      question: "The causal organism of late blight of potato is:",
-      options: ["Phytophthora infestans", "Alternaria solani", "Rhizoctonia solani", "Fusarium oxysporum"],
-      correct: 0,
-      explanation: "Phytophthora infestans is the causal organism of late blight of potato, which is one of the most destructive diseases of potato crop."
-    },
-    {
-      id: 3,
-      subject: "Genetics & Plant Breeding",
-      question: "In Mendelian genetics, the ratio obtained in F2 generation of a monohybrid cross is:",
-      options: ["1:1", "1:2:1", "3:1", "9:3:3:1"],
-      correct: 2,
-      explanation: "In a monohybrid cross, the F2 generation shows a phenotypic ratio of 3:1 (dominant:recessive) as established by Mendel's first law."
-    },
-    {
-      id: 4,
-      subject: "Soil Science",
-      question: "The optimum pH range for most agricultural crops is:",
-      options: ["4.5-5.5", "6.0-7.5", "8.0-9.0", "9.5-10.5"],
-      correct: 1,
-      explanation: "Most agricultural crops grow best in slightly acidic to neutral soil with pH range of 6.0-7.5, where nutrient availability is optimal."
-    },
-    {
-      id: 5,
-      subject: "Plant Physiology",
-      question: "Photosynthesis primarily occurs in which part of the leaf?",
-      options: ["Epidermis", "Mesophyll", "Vascular bundles", "Stomata"],
-      correct: 1,
-      explanation: "Photosynthesis primarily occurs in the mesophyll tissue of leaves, particularly in the palisade mesophyll which contains most chloroplasts."
-    },
-    {
-      id: 6,
-      subject: "Agronomy",
-      question: "Green Revolution in India was primarily associated with:",
-      options: ["Cotton production", "Rice and Wheat production", "Sugarcane production", "Pulse production"],
-      correct: 1,
-      explanation: "Green Revolution in India (1960s-70s) was primarily associated with increased production of rice and wheat through high-yielding varieties and modern agricultural techniques."
-    },
-    {
-      id: 7,
-      subject: "Agricultural Economics",
-      question: "The law of diminishing returns applies to:",
-      options: ["Long run only", "Short run only", "Both short and long run", "Neither short nor long run"],
-      correct: 1,
-      explanation: "The law of diminishing returns applies to short run production where at least one factor of production is fixed."
-    },
-    {
-      id: 8,
-      subject: "Environmental Science",
-      question: "Which greenhouse gas has the highest Global Warming Potential (GWP)?",
-      options: ["Carbon dioxide", "Methane", "Nitrous oxide", "Sulfur hexafluoride"],
-      correct: 3,
-      explanation: "Sulfur hexafluoride (SF6) has the highest Global Warming Potential among common greenhouse gases, though CO2 is more abundant."
-    },
-    {
-      id: 9,
-      subject: "Plant Breeding",
-      question: "Heterosis refers to:",
-      options: ["Hybrid vigor", "Pure line breeding", "Mutation breeding", "Tissue culture"],
-      correct: 0,
-      explanation: "Heterosis, also known as hybrid vigor, refers to the phenomenon where F1 hybrids show superior performance compared to their parents."
-    },
-    {
-      id: 10,
-      subject: "Soil Science",
-      question: "Which soil type is most suitable for rice cultivation?",
-      options: ["Sandy soil", "Clay soil", "Loamy soil", "Rocky soil"],
-      correct: 1,
-      explanation: "Clay soil is most suitable for rice cultivation as it retains water well, which is essential for paddy cultivation."
-    },
-    {
-      id: 11,
-      subject: "Plant Pathology",
-      question: "Integrated Pest Management (IPM) emphasizes on:",
-      options: ["Chemical control only", "Biological control only", "Combination of multiple control methods", "Physical control only"],
-      correct: 2,
-      explanation: "IPM emphasizes on the integration of multiple control methods including biological, chemical, cultural, and physical methods for sustainable pest management."
-    },
-    {
-      id: 12,
-      subject: "Agronomy",
-      question: "Crop rotation helps in:",
-      options: ["Maintaining soil fertility", "Breaking pest cycles", "Improving soil structure", "All of the above"],
-      correct: 3,
-      explanation: "Crop rotation helps in maintaining soil fertility, breaking pest and disease cycles, and improving soil structure and health."
-    },
-    {
-      id: 13,
-      subject: "Plant Physiology",
-      question: "Transpiration in plants mainly occurs through:",
-      options: ["Lenticels", "Stomata", "Cuticle", "Root hairs"],
-      correct: 1,
-      explanation: "About 90% of transpiration in plants occurs through stomata, which are tiny pores mainly found on leaf surfaces."
-    },
-    {
-      id: 14,
-      subject: "Agricultural Economics",
-      question: "Price elasticity of demand for agricultural products is generally:",
-      options: ["Elastic", "Inelastic", "Unitary elastic", "Perfectly elastic"],
-      correct: 1,
-      explanation: "Agricultural products generally have inelastic demand as they are necessities and have fewer substitutes."
-    },
-    {
-      id: 15,
-      subject: "Genetics",
-      question: "The technique used for DNA fingerprinting is:",
-      options: ["PCR", "RFLP", "Both PCR and RFLP", "Gel electrophoresis only"],
-      correct: 2,
-      explanation: "DNA fingerprinting uses both PCR (Polymerase Chain Reaction) for amplification and RFLP (Restriction Fragment Length Polymorphism) for analysis."
-    },
-    {
-      id: 16,
-      subject: "Environmental Science",
-      question: "Eutrophication of water bodies is caused by excess of:",
-      options: ["Carbon", "Nitrogen and Phosphorus", "Sulfur", "Iron"],
-      correct: 1,
-      explanation: "Eutrophication is caused by excess nitrogen and phosphorus from fertilizer runoff, leading to algal blooms and oxygen depletion."
-    },
-    {
-      id: 17,
-      subject: "Soil Science",
-      question: "Soil organic matter content is highest in:",
-      options: ["Desert soils", "Forest soils", "Agricultural soils", "Saline soils"],
-      correct: 1,
-      explanation: "Forest soils generally have the highest organic matter content due to continuous leaf litter and organic debris decomposition."
-    },
-    {
-      id: 18,
-      subject: "Plant Breeding",
-      question: "Marker-assisted selection (MAS) is used for:",
-      options: ["Yield improvement only", "Disease resistance only", "Both yield and quality traits", "Seed production only"],
-      correct: 2,
-      explanation: "MAS can be used for improving various traits including yield, quality, disease resistance, and stress tolerance."
-    },
-    {
-      id: 19,
-      subject: "Agronomy",
-      question: "The C4 pathway in photosynthesis is found in:",
-      options: ["Rice", "Wheat", "Maize", "Potato"],
-      correct: 2,
-      explanation: "Maize follows the C4 photosynthetic pathway, which is more efficient in hot climates and gives higher productivity."
-    },
-    {
-      id: 20,
-      subject: "Plant Pathology",
-      question: "Mycorrhizae represent:",
-      options: ["Plant-bacterial association", "Plant-fungal association", "Plant-viral association", "Plant-nematode association"],
-      correct: 1,
-      explanation: "Mycorrhizae represent a beneficial symbiotic association between plant roots and fungi, helping in nutrient uptake."
-    }
-  ],
-  studyRoadmap: {
-    totalWeeks: 24,
-    subjects: [
-      {
-        name: "Agronomy",
-        weeks: [1, 2, 3, 7, 13, 19],
-        topics: ["Crop Production", "Soil Management", "Water Management", "Nutrient Management"]
-      },
-      {
-        name: "Plant Pathology", 
-        weeks: [4, 5, 8, 14, 20],
-        topics: ["Disease Identification", "Pathogen Biology", "Disease Management", "IPM"]
-      },
-      {
-        name: "Genetics & Plant Breeding",
-        weeks: [6, 9, 10, 15, 21], 
-        topics: ["Mendelian Genetics", "Quantitative Genetics", "Breeding Methods", "Biotechnology"]
-      },
-      {
-        name: "Plant Physiology",
-        weeks: [11, 12, 16, 22],
-        topics: ["Photosynthesis", "Respiration", "Growth Regulators", "Stress Physiology"]
-      },
-      {
-        name: "Revision & Mock Tests",
-        weeks: [17, 18, 23, 24],
-        topics: ["Previous Papers", "Mock Tests", "Weak Areas", "Final Revision"]
-      }
-    ]
-  }
-};
+// Application State
+let currentQuestionIndex = 0;
+let userAnswers = [];
+let questions = [];
+let testStarted = false;
+let currentScore = 0;
+let selectedAnswer = null;
 
-// Application state
-let currentTest = {
-  questions: [],
-  currentQuestion: 0,
-  answers: {},
-  reviewQuestions: new Set(),
-  timeLeft: 40 * 60, // 40 minutes in seconds
-  timerInterval: null,
-  startTime: null
-};
-
-let userProgress = {
-  testsCompleted: 0,
-  totalScore: 0,
-  testHistory: [],
-  studyStreak: 0,
-  lastStudyDate: null,
-  roadmapProgress: {}
-};
+// Question data from the provided JSON
+const questionData = [
+  {"id":1,"question":"The edible portion of potato (Solanum tuberosum) is a ___.","options":{"A":"modified root","B":"stem tuber","C":"bulb","D":"corm"},"correct":"B","explanation":"Potato develops from underground stem tissue that swells to store starch, forming a stem tuber."},
+  {"id":2,"question":"'Amrapali' mango was developed by crossing 'Dashehari' with which South Indian variety?","options":{"A":"Alphonso","B":"Neelum","C":"Totapuri","D":"Ratna"},"correct":"B","explanation":"Amrapali is a clonal hybrid of North Indian 'Dashehari' × South Indian 'Neelum', released by IARI."},
+  {"id":3,"question":"Which plant growth regulator is routinely sprayed to induce bolting in onion and celery?","options":{"A":"Abscisic acid","B":"Indole-3-acetic acid","C":"Gibberellic acid","D":"Ethylene"},"correct":"C","explanation":"Gibberellins promote stem elongation and bolt formation in biennial vegetables grown for seed."},
+  {"id":4,"question":"Whiptail disorder of cauliflower is caused by the deficiency of ___ in soil.","options":{"A":"Boron","B":"Molybdenum","C":"Calcium","D":"Zinc"},"correct":"B","explanation":"Molybdenum deficiency results in malformed lamina giving a strap-like 'whiptail' appearance in cauliflower leaves."},
+  {"id":5,"question":"Production of off-season cucurbits inside protected structures to obtain earlier or later harvests is technically called ___.","options":{"A":"precision farming","B":"market gardening","C":"vegetable forcing","D":"truck farming"},"correct":"C","explanation":"Forcing refers to manipulating environment (temperature/light) under glass/polyhouse to accelerate or delay vegetable crops."},
+  {"id":6,"question":"The physiological maturity of mango for harvest is best judged in the field by the change in ___.","options":{"A":"specific gravity of fruit","B":"pulp TSS","C":"shoulder filling and colour break","D":"seed moisture"},"correct":"C","explanation":"In mango, fully developed shoulders that rise above the stalk end with slight colour break indicate harvest maturity."},
+  {"id":7,"question":"Which micronutrient is translocated only in the xylem and hence its deficiency symptoms first appear on younger leaves?","options":{"A":"Nitrogen","B":"Magnesium","C":"Iron","D":"Potassium"},"correct":"C","explanation":"Iron is relatively immobile in plants; deficiency causes interveinal chlorosis of emerging young leaves first."},
+  {"id":8,"question":"'Pusa Bholanath' is a high-yielding variety of which leafy vegetable?","options":{"A":"Spinach beet","B":"Fenugreek","C":"Coriander","D":"Amaranthus"},"correct":"A","explanation":"Pusa Bholanath, released by IARI, is a popular spinach beet variety with dark-green succulent leaves."},
+  {"id":9,"question":"The optimum spacing recommended for planting tomato hybrids under drip irrigation is approximately ___.","options":{"A":"120 cm × 45 cm","B":"90 cm × 60 cm","C":"45 cm × 45 cm","D":"30 cm × 30 cm"},"correct":"B","explanation":"Wider row spacing (90 cm) accommodates drip laterals while 60 cm intra-row maintains plant population for indeterminate hybrids."},
+  {"id":10,"question":"Which of the following apple rootstocks imparts dwarfing habit to the scion and is denoted as M-9?","options":{"A":"MM-106","B":"M-9","C":"MM-111","D":"M-7"},"correct":"B","explanation":"The M-series rootstocks from East Malling, UK; M-9 is widely used to produce dwarf high-density apple orchards."},
+  {"id":11,"question":"Bacterial wilt of solanaceous vegetables such as brinjal and tomato is caused by ___.","options":{"A":"Pseudomonas syringae","B":"Ralstonia solanacearum","C":"Xanthomonas campestris","D":"Erwinia carotovora"},"correct":"B","explanation":"Ralstonia (formerly Pseudomonas) solanacearum invades xylem vessels causing sudden wilting without yellowing in warm humid climates."},
+  {"id":12,"question":"Which Indian institute maintains the National Gene Bank for vegetable crops?","options":{"A":"IIHR, Bengaluru","B":"IIVR, Varanasi","C":"NBPGR, New Delhi","D":"NRC Seed Spices, Ajmer"},"correct":"C","explanation":"The National Bureau of Plant Genetic Resources (NBPGR) manages India's National Gene Bank including vegetable germplasm."},
+  {"id":13,"question":"In seed certification, the colour of the tag used for certified seed class is ___.","options":{"A":"Golden yellow","B":"White","C":"Azure blue","D":"Purple"},"correct":"C","explanation":"Certified seed tags are azure blue; breeder seeds are golden yellow and foundation seed tags are white."},
+  {"id":14,"question":"According to ICAR norms, the minimum field isolation distance for foundation seed production of okra is ___ metres.","options":{"A":"50","B":"100","C":"200","D":"400"},"correct":"C","explanation":"Okra is often–cross-pollinated; foundation seed requires 200 m isolation to maintain genetic purity."},
+  {"id":15,"question":"Which vegetable crop exhibits protogyny and is therefore commonly cross-pollinated by insects?","options":{"A":"Ash gourd","B":"Okra","C":"Cucumber","D":"French bean"},"correct":"C","explanation":"Cucumber flowers open as pistillate phase earlier than staminate (protogyny), favouring insect cross-pollination."},
+  {"id":16,"question":"The scientific name of drumstick tree, valued for pods and leaves, is ___ .","options":{"A":"Moringa oleifera","B":"Morus alba","C":"Manihot esculenta","D":"Momordica charantia"},"correct":"A","explanation":"Drumstick or moringa is Moringa oleifera, a fast-growing multipurpose tree of the family Moringaceae."},
+  {"id":17,"question":"In precision farming, the equipment that allows differential application of inputs within a field based on GPS-generated maps is termed ___.","options":{"A":"variable rate technology (VRT)","B":"remote sensing","C":"drip fertigation","D":"GIS layering"},"correct":"A","explanation":"VRT controllers change seed, fertiliser or pesticide rates on the go using georeferenced prescription maps."},
+  {"id":18,"question":"Black heart physiological disorder in storage potato is primarily due to ___.","options":{"A":"low temperature injury","B":"high CO₂ and low O₂ in tuber centre","C":"boron toxicity","D":"viral infection"},"correct":"B","explanation":"Poor ventilation in piles elevates CO₂, depletes O₂ inside tubers causing central tissue necrosis called black heart."},
+  {"id":19,"question":"Which one of the following is a gynodioecious muskmelon hybrid developed in India?","options":{"A":"Punjab Hybrid-1","B":"MH-10","C":"Pusa Sharbati","D":"Arka Jeet"},"correct":"B","explanation":"Hybrid MH-10 is based on gynoecious × monoecious lines giving high fruit set and earliness in muskmelon."},
+  {"id":20,"question":"In tissue culture, the first stage where an explant establishes and begins sterile growth on nutrient medium is called ___ .","options":{"A":"initiation","B":"multiplication","C":"rooting","D":"acclimatisation"},"correct":"A","explanation":"Stage I (initiation) covers disinfection, excision and establishment of aseptic culture before shoot multiplication."},
+  {"id":21,"question":"Which disease of grape is managed effectively by grafting susceptible cultivars on Dogridge rootstock?","options":{"A":"Downy mildew","B":"Powdery mildew","C":"Phylloxera","D":"Bacterial canker"},"correct":"C","explanation":"Dogridge (Vitis champinii) rootstock is resistant to root-feeding phylloxera insects thereby protecting V. vinifera scions."},
+  {"id":22,"question":"The twin row planting system (60 cm × 30 cm × 120 cm) is characteristic of high-density planting in which orchard crop?","options":{"A":"Banana","B":"Mango","C":"Guava","D":"Pomegranate"},"correct":"B","explanation":"Ultra-high-density mango orchards adopt paired rows 60 cm apart, 30 cm intra-row and 120 cm between pairs."},
+  {"id":23,"question":"Which biofertilizer microorganism fixes atmospheric nitrogen in association with non-legume cereal roots?","options":{"A":"Rhizobium","B":"Azotobacter","C":"Azospirillum","D":"Phosphobacteria"},"correct":"C","explanation":"Azospirillum species colonise rhizosphere of cereals/grasses and fix nitrogen non-symbiotically enhancing root growth."},
+  {"id":24,"question":"The critical stage of irrigation in cabbage for head development corresponds to ___ .","options":{"A":"early seedling establishment","B":"rosette formation","C":"curd initiation","D":"head initiation"},"correct":"D","explanation":"Adequate soil moisture at head initiation is essential; stress leads to small loose heads in cabbage."},
+  {"id":25,"question":"Which species of Trichoderma is widely formulated as a bio-fungicide for soil-borne pathogen control in vegetables?","options":{"A":"T. harzianum","B":"T. viride","C":"T. reesei","D":"T. koningii"},"correct":"A","explanation":"Commercial products of Trichoderma harzianum suppress damping-off, root rot and wilt pathogens in nurseries and fields."},
+  {"id":26,"question":"The term 'Golden Revolution' in Indian agriculture is associated with remarkable growth in ___ .","options":{"A":"cereal productivity","B":"oilseed production","C":"horticulture output","D":"milk production"},"correct":"C","explanation":"Golden Revolution refers to rapid expansion in horticulture—fruits, vegetables, flowers and honey—from mid-1990s."},
+  {"id":27,"question":"Which mutation breeding-derived variety of papaya is known for very low papain activity suitable for table purpose?","options":{"A":"Pusa Nanha","B":"Pusa Delicious","C":"Sunrise Solo","D":"Pusa Peetamber"},"correct":"A","explanation":"Pusa Nanha is a dwarf mutant of 'Pusa Dwarf' with low latex, making it easy for home gardens and pot culture."},
+  {"id":28,"question":"In vermicomposting, the epigeic earthworm species commonly used worldwide is ___ .","options":{"A":"Eisenia fetida","B":"Pheretima posthuma","C":"Lampito mauritii","D":"Drawida williamsoni"},"correct":"A","explanation":"Eisenia fetida (red wiggler) thrives on organic waste near surface and efficiently converts it into vermicompost."},
+  {"id":29,"question":"Which post-harvest treatment is recommended to delay scald in stored apples?","options":{"A":"Ethrel dipping","B":"1-MCP fumigation","C":"Hot water dip","D":"Pre-cooling at 15 °C"},"correct":"B","explanation":"1-Methylcyclopropene blocks ethylene receptors, reducing superficial scald and maintaining firmness during cold storage."},
+  {"id":30,"question":"Strip cropping is an agronomic measure primarily aimed at ___ .","options":{"A":"increasing plant population","B":"reducing nutrient fixation","C":"controlling soil erosion by wind","D":"facilitating mechanisation"},"correct":"C","explanation":"Alternate strips of erosion-permitting and erosion-resisting crops across wind direction slowdown soil loss in drylands."},
+  {"id":31,"question":"The economic threshold level (ETL) for diamondback moth on cabbage is ___ larvae per plant.","options":{"A":"1","B":"5","C":"10","D":"25"},"correct":"B","explanation":"IPM recommends insecticidal intervention when diamondback moth averages five larvae per cabbage plant."},
+  {"id":32,"question":"Which cultivar of brinjal is resistant to bacterial wilt and hence preferred as rootstock in grafted seedling technology?","options":{"A":"Surya","B":"IC-9079 (Solanum torvum)","C":"BH-2","D":"Arka Anand"},"correct":"B","explanation":"Wild eggplant Solanum torvum resists Ralstonia wilt and nematodes; used as rootstock for commercial hybrids."},
+  {"id":33,"question":"The term 'acoelomycetes' in fungal taxonomy corresponds to which group of plant pathogens?","options":{"A":"basidiomycetes rusts","B":"asco-deuteromycetes without fruit bodies","C":"oomycetes downy mildews","D":"zygomycetes molds"},"correct":"B","explanation":"A-coelomycetes are imperfect fungi producing conidia directly on hyphae without enclosed fruiting bodies (pycnidia)."},
+  {"id":34,"question":"Which analytical device is used in the field to estimate chlorophyll content and thus nitrogen status of rice leaves?","options":{"A":"Leaf area meter","B":"SPAD chlorophyll meter","C":"Porometer","D":"Pressure bomb"},"correct":"B","explanation":"SPAD meters measure leaf greenness (chlorophyll), guiding site-specific N top-dressing in precision farming."},
+  {"id":35,"question":"'Khasi Mandarin' belongs botanically to which species?","options":{"A":"Citrus sinensis","B":"Citrus reticulata","C":"Citrus limon","D":"Citrus paradisi"},"correct":"B","explanation":"Indian mandarins including Nagpur, Darjeeling and Khasi are grouped under Citrus reticulata (tangerines)."},
+  {"id":36,"question":"Which vegetable crop exhibits C₄ photosynthetic pathway and therefore high water-use efficiency?","options":{"A":"Tomato","B":"Okra","C":"Amaranthus","D":"Pea"},"correct":"C","explanation":"Amaranthus species are C₄ leafy vegetables tolerant to heat and efficient in utilising light, water and nitrogen."},
+  {"id":37,"question":"The internationally accepted index for grading mangoes by size is based on ___ .","options":{"A":"length of fruit","B":"weight range (count per 4 kg carton)","C":"specific gravity","D":"circumference"},"correct":"B","explanation":"Export standards classify mango size by number of fruits fitting in a 4-kg pack, e.g., count 6, 7, 8 etc."},
+  {"id":38,"question":"Which vitamin is especially rich in drumstick (moringa) leaves, making them a valuable nutritional supplement?","options":{"A":"Vitamin A (β-carotene)","B":"Vitamin C (ascorbic acid)","C":"Vitamin D","D":"Vitamin B₁₂"},"correct":"B","explanation":"Moringa leaves contain up to 220 mg 100 g⁻¹ vitamin C, surpassing many common vegetables."},
+  {"id":39,"question":"In citrus rootstock breeding, the cross between 'Rangpur lime' and 'trifoliate orange' produced the widely used rootstock called ___ .","options":{"A":"Carrizo citrange","B":"Volkamer lemon","C":"Cleopatra mandarin","D":"Sour orange"},"correct":"A","explanation":"Citrange (citrus ×carrizo) combines lime vigour with trifoliate cold tolerance and nematode resistance."},
+  {"id":40,"question":"Which fungicide belongs to the FRAC code 11 (QoI inhibitors) and is commonly used against powdery mildew in cucurbits?","options":{"A":"Mancozeb","B":"Azoxystrobin","C":"Copper oxychloride","D":"Carbendazim"},"correct":"B","explanation":"Azoxystrobin, a strobilurin (QoI) fungicide, blocks mitochondrial respiration and controls many foliar fungal diseases."},
+  {"id":41,"question":"The seed multiplication ratio (SMR) is highest in which of the following crops?","options":{"A":"Groundnut","B":"Rice","C":"Pearl millet","D":"Potato"},"correct":"C","explanation":"Pearl millet produces ~1:200 seed yield to seed rate, giving highest SMR among common field/vegetable crops."},
+  {"id":42,"question":"Which instrument is used to measure soil moisture tension directly in the root zone of horticultural crops?","options":{"A":"Tensiometer","B":"Pyranometer","C":"Psychrometer","D":"Anemometer"},"correct":"A","explanation":"Tensiometers with porous ceramic cup and vacuum gauge measure matric suction (kPa), guiding irrigation scheduling."},
+  {"id":43,"question":"The allowable maximum residue limit (MRL) of carbendazim in fresh tomatoes as per FSSAI (India) is ___ mg kg⁻¹.","options":{"A":"0.1","B":"0.5","C":"1.0","D":"5.0"},"correct":"B","explanation":"Food Safety and Standards (Contaminants) Regulations specify 0.5 mg kg⁻¹ MRL for carbendazim in tomato fruit."},
+  {"id":44,"question":"Which leafy vegetable is a rich natural source of the betalain pigment betalain-indigo giving deep red colour?","options":{"A":"Basella alba (red)","B":"Spinacia oleracea","C":"Trigonella foenum-graecum","D":"Corchorus olitorius"},"correct":"A","explanation":"Red-stemmed Basella (Malabar spinach) accumulates betalain pigments imparting purple-red colour to stems and leaves."},
+  {"id":45,"question":"The optimum temperature range for successful spawn run (mycelial colonisation) in white button mushroom cultivation is ___ °C.","options":{"A":"10-14","B":"16-18","C":"22-25","D":"28-30"},"correct":"C","explanation":"Agaricus bisporus spawn grows best at 22-25 °C; casing and fruiting require cooler 14-18 °C."},
+  {"id":46,"question":"Which component of drip irrigation system controls both filtration and fertigation?","options":{"A":"Mainline","B":"Emitting pipe","C":"Venturi injector with filter unit","D":"Flush valve"},"correct":"C","explanation":"Head control unit comprising screens/filters and venturi injector ensures clean water supply and dissolves fertilisers into drip system."},
+  {"id":47,"question":"In comparative life cycle analysis of greenhouse vs open-field tomato, the most energy-intensive input under Indian conditions is ___ .","options":{"A":"polyethylene film production","B":"electricity for cooling fans","C":"fertiliser manufacture","D":"diesel for pumping"},"correct":"A","explanation":"Studies show manufacture and replacement of greenhouse plastic cladding consumes more cumulative energy than operational inputs in tropics."},
+  {"id":48,"question":"Which cropping system indexes market orientation with high per-unit returns by growing high-value perishables near urban centres?","options":{"A":"Truck gardening","B":"Kitchen gardening","C":"Plantation cropping","D":"Rabi fallowing"},"correct":"A","explanation":"Truck (market) gardening specialises in vegetable production for distant sale using rapid transport to urban markets."},
+  {"id":49,"question":"Topping (removal of apical bud) in chilli is mainly practiced to ___ .","options":{"A":"control viral diseases","B":"encourage lateral branching and higher fruit set","C":"reduce pest incidence","D":"prevent fruit drop"},"correct":"B","explanation":"Pinching apical meristem diverts auxins, inducing side shoots that bear more flowers and fruits in chilli."},
+  {"id":50,"question":"The internationally accepted permissible limit of aflatoxin B₁ in shelled groundnuts for direct human consumption is ___ ppb (µg kg⁻¹).","options":{"A":"2","B":"5","C":"20","D":"100"},"correct":"C","explanation":"Codex and FSSAI allow maximum 20 ppb aflatoxin B₁ in ready-to-eat groundnuts; stricter limits apply for infants."}
+];
 
 // Initialize application
-document.addEventListener('DOMContentLoaded', function() {
-  initializeApp();
-});
-
 function initializeApp() {
-  loadUserProgress();
-  setupEventListeners();
-  updateDashboard();
-  startCountdown();
-  initializeRoadmap();
-  initializeTheme();
-  showSection('home');
+    console.log('Initializing app...');
+    questions = questionData;
+    console.log('Questions loaded:', questions.length);
+    showScreen('welcome-screen');
+    setupEventListeners();
 }
 
-function loadUserProgress() {
-  const saved = localStorage.getItem('asrb-net-progress');
-  if (saved) {
-    userProgress = { ...userProgress, ...JSON.parse(saved) };
-  }
-}
-
-function saveUserProgress() {
-  localStorage.setItem('asrb-net-progress', JSON.stringify(userProgress));
-}
-
+// Setup event listeners
 function setupEventListeners() {
-  // Navigation
-  document.querySelectorAll('.nav-btn, [data-section]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const section = e.target.getAttribute('data-section');
-      if (section) {
-        showSection(section);
-        updateNavigation(section);
-      }
-    });
-  });
-
-  // Theme toggle
-  document.getElementById('themeToggle').addEventListener('click', toggleTheme);
-
-  // Mock test events
-  document.getElementById('startTest').addEventListener('click', startMockTest);
-  document.getElementById('prevQuestion').addEventListener('click', () => navigateQuestion(-1));
-  document.getElementById('nextQuestion').addEventListener('click', () => navigateQuestion(1));
-  document.getElementById('markReview').addEventListener('click', markForReview);
-  document.getElementById('clearResponse').addEventListener('click', clearResponse);
-  document.getElementById('submitTest').addEventListener('click', submitTest);
-  document.getElementById('retakeTest').addEventListener('click', resetTest);
-}
-
-function showSection(sectionId) {
-  document.querySelectorAll('.section').forEach(section => {
-    section.classList.remove('active');
-  });
-  document.getElementById(sectionId).classList.add('active');
-
-  // Update navigation
-  updateNavigation(sectionId);
-
-  // Initialize section-specific content
-  if (sectionId === 'results') {
-    initializeResults();
-  }
-}
-
-function updateNavigation(activeSection) {
-  document.querySelectorAll('.nav-btn').forEach(btn => {
-    btn.classList.remove('active');
-    if (btn.getAttribute('data-section') === activeSection) {
-      btn.classList.add('active');
-    }
-  });
-}
-
-function initializeTheme() {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  document.documentElement.setAttribute('data-color-scheme', savedTheme);
-  updateThemeToggle(savedTheme);
-}
-
-function toggleTheme() {
-  const currentTheme = document.documentElement.getAttribute('data-color-scheme');
-  const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-  
-  document.documentElement.setAttribute('data-color-scheme', newTheme);
-  localStorage.setItem('theme', newTheme);
-  updateThemeToggle(newTheme);
-}
-
-function updateThemeToggle(theme) {
-  const toggle = document.getElementById('themeToggle');
-  toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
-}
-
-function startCountdown() {
-  const examDate = new Date(APP_DATA.examInfo.examDate).getTime();
-  
-  function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = examDate - now;
+    console.log('Setting up event listeners...');
     
-    if (distance > 0) {
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      
-      document.getElementById('days').textContent = days;
-      document.getElementById('hours').textContent = hours;
-      document.getElementById('minutes').textContent = minutes;
+    // Start test button
+    const startBtn = document.getElementById('start-test-btn');
+    console.log('Start button:', startBtn);
+    if (startBtn) {
+        startBtn.addEventListener('click', function(e) {
+            console.log('Start button clicked');
+            e.preventDefault();
+            startTest();
+        });
+    }
+    
+    // Submit button
+    const submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', function(e) {
+            console.log('Submit button clicked');
+            e.preventDefault();
+            submitAnswer();
+        });
+    }
+    
+    // Next question button
+    const nextBtn = document.getElementById('next-btn');
+    if (nextBtn) {
+        nextBtn.addEventListener('click', function(e) {
+            console.log('Next button clicked');
+            e.preventDefault();
+            nextQuestion();
+        });
+    }
+    
+    // Restart button
+    const restartBtn = document.getElementById('restart-btn');
+    if (restartBtn) {
+        restartBtn.addEventListener('click', function(e) {
+            console.log('Restart button clicked');
+            e.preventDefault();
+            restartTest();
+        });
+    }
+}
+
+// Screen management
+function showScreen(screenId) {
+    console.log('Showing screen:', screenId);
+    const screens = document.querySelectorAll('.screen');
+    screens.forEach(screen => screen.classList.remove('active'));
+    const targetScreen = document.getElementById(screenId);
+    if (targetScreen) {
+        targetScreen.classList.add('active');
+        console.log('Screen activated:', screenId);
     } else {
-      document.getElementById('countdown').innerHTML = '<div class="countdown__item"><span>Exam</span><label>Started</label></div>';
+        console.error('Screen not found:', screenId);
     }
-  }
-  
-  updateCountdown();
-  setInterval(updateCountdown, 60000); // Update every minute
 }
 
-function updateDashboard() {
-  document.getElementById('testsCompleted').textContent = userProgress.testsCompleted;
-  
-  const avgScore = userProgress.testsCompleted > 0 
-    ? Math.round((userProgress.totalScore / userProgress.testsCompleted) * 100 / 80) 
-    : 0;
-  document.getElementById('averageScore').textContent = avgScore + '%';
-  
-  // Update study streak
-  const today = new Date().toDateString();
-  if (userProgress.lastStudyDate !== today) {
-    const lastDate = userProgress.lastStudyDate ? new Date(userProgress.lastStudyDate) : new Date(0);
-    const timeDiff = new Date() - lastDate;
-    const dayDiff = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+// Start test
+function startTest() {
+    console.log('Starting test...');
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    currentScore = 0;
+    selectedAnswer = null;
+    testStarted = true;
     
-    if (dayDiff > 1) {
-      userProgress.studyStreak = 0;
-    }
-  }
-  
-  document.getElementById('studyStreak').textContent = userProgress.studyStreak;
-  
-  // Calculate roadmap progress
-  const completedTopics = Object.values(userProgress.roadmapProgress).filter(Boolean).length;
-  const totalTopics = APP_DATA.studyRoadmap.subjects.reduce((total, subject) => total + subject.topics.length, 0);
-  const roadmapPercent = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
-  document.getElementById('roadmapProgress').textContent = roadmapPercent + '%';
+    showScreen('test-screen');
+    
+    // Load the first question
+    setTimeout(() => {
+        loadQuestion();
+    }, 100);
 }
 
-function startMockTest() {
-  // Shuffle questions and select 20
-  const shuffled = [...APP_DATA.mockQuestions].sort(() => 0.5 - Math.random());
-  currentTest.questions = shuffled.slice(0, 20);
-  currentTest.currentQuestion = 0;
-  currentTest.answers = {};
-  currentTest.reviewQuestions.clear();
-  currentTest.timeLeft = 40 * 60; // 40 minutes
-  currentTest.startTime = Date.now();
-  
-  document.getElementById('testStart').classList.add('hidden');
-  document.getElementById('testInterface').classList.remove('hidden');
-  
-  initializeQuestionNavigator();
-  displayQuestion();
-  startTimer();
-}
-
-function initializeQuestionNavigator() {
-  const grid = document.getElementById('questionGrid');
-  grid.innerHTML = '';
-  
-  for (let i = 0; i < currentTest.questions.length; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'question-number';
-    btn.textContent = i + 1;
-    btn.addEventListener('click', () => goToQuestion(i));
-    grid.appendChild(btn);
-  }
-  
-  updateQuestionNavigator();
-}
-
-function displayQuestion() {
-  const question = currentTest.questions[currentTest.currentQuestion];
-  if (!question) return;
-  
-  document.getElementById('questionSubject').textContent = question.subject;
-  document.getElementById('questionText').textContent = question.question;
-  document.getElementById('currentQuestion').textContent = currentTest.currentQuestion + 1;
-  
-  const container = document.getElementById('optionsContainer');
-  container.innerHTML = '';
-  
-  question.options.forEach((option, index) => {
-    const optionDiv = document.createElement('div');
-    optionDiv.className = 'option';
+// Load current question
+function loadQuestion() {
+    console.log('Loading question:', currentQuestionIndex + 1);
+    const question = questions[currentQuestionIndex];
+    selectedAnswer = null;
     
-    const radio = document.createElement('input');
-    radio.type = 'radio';
-    radio.name = 'question_' + question.id;
-    radio.value = index;
-    radio.id = 'option_' + index;
+    // Update progress
+    const currentQuestionEl = document.getElementById('current-question');
+    const totalQuestionsEl = document.getElementById('total-questions');
+    const currentScoreEl = document.getElementById('current-score');
     
-    const label = document.createElement('label');
-    label.htmlFor = 'option_' + index;
-    label.textContent = option;
+    if (currentQuestionEl) currentQuestionEl.textContent = currentQuestionIndex + 1;
+    if (totalQuestionsEl) totalQuestionsEl.textContent = questions.length;
+    if (currentScoreEl) currentScoreEl.textContent = currentScore;
     
-    optionDiv.appendChild(radio);
-    optionDiv.appendChild(label);
-    
-    // Check if this option was previously selected
-    if (currentTest.answers[question.id] === index) {
-      radio.checked = true;
-      optionDiv.classList.add('selected');
+    const progressPercent = ((currentQuestionIndex + 1) / questions.length) * 100;
+    const progressFill = document.getElementById('progress-fill');
+    if (progressFill) {
+        progressFill.style.width = progressPercent + '%';
     }
     
-    radio.addEventListener('change', () => {
-      currentTest.answers[question.id] = index;
-      document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-      optionDiv.classList.add('selected');
-      updateQuestionNavigator();
-    });
-    
-    optionDiv.addEventListener('click', () => {
-      radio.checked = true;
-      radio.dispatchEvent(new Event('change'));
-    });
-    
-    container.appendChild(optionDiv);
-  });
-  
-  updateQuestionNavigator();
-  updateNavigationButtons();
-}
-
-function updateQuestionNavigator() {
-  document.querySelectorAll('.question-number').forEach((btn, index) => {
-    btn.classList.remove('answered', 'review', 'current');
-    
-    if (index === currentTest.currentQuestion) {
-      btn.classList.add('current');
-    } else if (currentTest.reviewQuestions.has(currentTest.questions[index].id)) {
-      btn.classList.add('review');
-    } else if (currentTest.answers.hasOwnProperty(currentTest.questions[index].id)) {
-      btn.classList.add('answered');
-    }
-  });
-}
-
-function updateNavigationButtons() {
-  document.getElementById('prevQuestion').disabled = currentTest.currentQuestion === 0;
-  document.getElementById('nextQuestion').disabled = currentTest.currentQuestion === currentTest.questions.length - 1;
-}
-
-function navigateQuestion(direction) {
-  const newIndex = currentTest.currentQuestion + direction;
-  if (newIndex >= 0 && newIndex < currentTest.questions.length) {
-    currentTest.currentQuestion = newIndex;
-    displayQuestion();
-  }
-}
-
-function goToQuestion(index) {
-  currentTest.currentQuestion = index;
-  displayQuestion();
-}
-
-function markForReview() {
-  const questionId = currentTest.questions[currentTest.currentQuestion].id;
-  if (currentTest.reviewQuestions.has(questionId)) {
-    currentTest.reviewQuestions.delete(questionId);
-    document.getElementById('markReview').textContent = 'Mark for Review';
-  } else {
-    currentTest.reviewQuestions.add(questionId);
-    document.getElementById('markReview').textContent = 'Unmark Review';
-  }
-  updateQuestionNavigator();
-}
-
-function clearResponse() {
-  const questionId = currentTest.questions[currentTest.currentQuestion].id;
-  delete currentTest.answers[questionId];
-  
-  document.querySelectorAll('input[type="radio"]').forEach(radio => {
-    radio.checked = false;
-  });
-  document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-  
-  updateQuestionNavigator();
-}
-
-function startTimer() {
-  currentTest.timerInterval = setInterval(() => {
-    currentTest.timeLeft--;
-    
-    const minutes = Math.floor(currentTest.timeLeft / 60);
-    const seconds = currentTest.timeLeft % 60;
-    
-    document.getElementById('timer').textContent = 
-      `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-    
-    if (currentTest.timeLeft <= 0) {
-      submitTest();
-    }
-  }, 1000);
-}
-
-function submitTest() {
-  if (confirm('Are you sure you want to submit the test?')) {
-    clearInterval(currentTest.timerInterval);
-    
-    const timeTaken = Math.floor((Date.now() - currentTest.startTime) / 1000);
-    const results = calculateResults(timeTaken);
-    
-    // Update user progress
-    userProgress.testsCompleted++;
-    userProgress.totalScore += results.score;
-    userProgress.testHistory.push({
-      date: new Date().toISOString(),
-      score: results.score,
-      percentage: results.percentage,
-      timeTaken: timeTaken,
-      subjectWise: results.subjectWise
-    });
-    
-    // Update study streak
-    const today = new Date().toDateString();
-    if (userProgress.lastStudyDate !== today) {
-      userProgress.studyStreak++;
-      userProgress.lastStudyDate = today;
+    // Load question text
+    const questionTextEl = document.getElementById('question-text');
+    if (questionTextEl) {
+        questionTextEl.textContent = question.question;
     }
     
-    saveUserProgress();
-    updateDashboard();
-    
-    displayResults(results);
-  }
-}
-
-function calculateResults(timeTaken) {
-  let correctAnswers = 0;
-  let wrongAnswers = 0;
-  let subjectWise = {};
-  
-  currentTest.questions.forEach(question => {
-    const userAnswer = currentTest.answers[question.id];
-    const isCorrect = userAnswer === question.correct;
-    
-    if (!subjectWise[question.subject]) {
-      subjectWise[question.subject] = { correct: 0, total: 0 };
-    }
-    subjectWise[question.subject].total++;
-    
-    if (userAnswer !== undefined) {
-      if (isCorrect) {
-        correctAnswers++;
-        subjectWise[question.subject].correct++;
-      } else {
-        wrongAnswers++;
-      }
-    }
-  });
-  
-  const score = (correctAnswers * 4) - (wrongAnswers * 1.33);
-  const percentage = (score / 80) * 100;
-  
-  return {
-    score: Math.round(score * 100) / 100,
-    percentage: Math.round(percentage * 100) / 100,
-    correctAnswers,
-    wrongAnswers,
-    unanswered: currentTest.questions.length - correctAnswers - wrongAnswers,
-    timeTaken,
-    subjectWise
-  };
-}
-
-function displayResults(results) {
-  document.getElementById('testInterface').classList.add('hidden');
-  document.getElementById('testResults').classList.remove('hidden');
-  
-  document.getElementById('finalScore').textContent = `${results.score}/80`;
-  document.getElementById('percentage').textContent = `${results.percentage}%`;
-  
-  const minutes = Math.floor(results.timeTaken / 60);
-  const seconds = results.timeTaken % 60;
-  document.getElementById('timeTaken').textContent = 
-    `${minutes}:${seconds.toString().padStart(2, '0')}`;
-  
-  // Create performance chart
-  createPerformanceChart(results);
-  
-  // Display solutions
-  displaySolutions();
-}
-
-function createPerformanceChart(results) {
-  const ctx = document.getElementById('performanceChart').getContext('2d');
-  
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: {
-      labels: ['Correct', 'Wrong', 'Unanswered'],
-      datasets: [{
-        data: [results.correctAnswers, results.wrongAnswers, results.unanswered],
-        backgroundColor: ['#1FB8CD', '#B4413C', '#ECEBD5']
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Question Analysis'
-        },
-        legend: {
-          position: 'bottom'
-        }
-      }
-    }
-  });
-}
-
-function displaySolutions() {
-  const container = document.getElementById('solutions');
-  container.innerHTML = '<h3>Detailed Solutions</h3>';
-  
-  currentTest.questions.forEach((question, index) => {
-    const userAnswer = currentTest.answers[question.id];
-    const isCorrect = userAnswer === question.correct;
-    
-    const solutionDiv = document.createElement('div');
-    solutionDiv.className = 'solution-item';
-    
-    solutionDiv.innerHTML = `
-      <div class="solution-question">
-        <strong>Q${index + 1}:</strong> ${question.question}
-      </div>
-      <div class="solution-answer ${isCorrect ? 'correct' : 'incorrect'}">
-        <strong>Your Answer:</strong> ${userAnswer !== undefined ? question.options[userAnswer] : 'Not Answered'}
-        <br>
-        <strong>Correct Answer:</strong> ${question.options[question.correct]}
-      </div>
-      <div class="solution-explanation">
-        <strong>Explanation:</strong> ${question.explanation}
-      </div>
-    `;
-    
-    container.appendChild(solutionDiv);
-  });
-}
-
-function resetTest() {
-  document.getElementById('testResults').classList.add('hidden');
-  document.getElementById('testStart').classList.remove('hidden');
-  
-  // Reset test state
-  currentTest = {
-    questions: [],
-    currentQuestion: 0,
-    answers: {},
-    reviewQuestions: new Set(),
-    timeLeft: 40 * 60,
-    timerInterval: null,
-    startTime: null
-  };
-}
-
-function initializeRoadmap() {
-  const container = document.getElementById('roadmap');
-  container.innerHTML = '';
-  
-  APP_DATA.studyRoadmap.subjects.forEach((subject, subjectIndex) => {
-    const sectionDiv = document.createElement('div');
-    sectionDiv.className = 'subject-section';
-    sectionDiv.setAttribute('data-subject-index', subjectIndex);
-    
-    const completedTopics = subject.topics.filter(topic => 
-      userProgress.roadmapProgress[`${subject.name}_${topic}`]
-    ).length;
-    
-    sectionDiv.innerHTML = `
-      <div class="subject-header">
-        <h3 class="subject-title">${subject.name}</h3>
-        <span class="subject-progress">${completedTopics}/${subject.topics.length} topics</span>
-      </div>
-      <div class="weeks-grid">
-        ${subject.weeks.map(week => `<div class="week-item">Week ${week}</div>`).join('')}
-      </div>
-      <div class="topics-container"></div>
-    `;
-    
-    const topicsContainer = sectionDiv.querySelector('.topics-container');
-    subject.topics.forEach(topic => {
-      const topicDiv = document.createElement('div');
-      topicDiv.className = 'topic-checkbox';
-      
-      const checkbox = document.createElement('input');
-      checkbox.type = 'checkbox';
-      checkbox.id = `${subject.name}_${topic}`;
-      checkbox.checked = userProgress.roadmapProgress[checkbox.id] || false;
-      
-      if (checkbox.checked) {
-        topicDiv.classList.add('completed');
-      }
-      
-      checkbox.addEventListener('change', () => {
-        userProgress.roadmapProgress[checkbox.id] = checkbox.checked;
-        saveUserProgress();
-        updateDashboard();
-        updateRoadmapProgress();
-        updateSubjectProgress(subjectIndex, subject);
+    // Load options
+    const optionsContainer = document.getElementById('options-container');
+    if (optionsContainer) {
+        optionsContainer.innerHTML = '';
         
-        if (checkbox.checked) {
-          topicDiv.classList.add('completed');
-        } else {
-          topicDiv.classList.remove('completed');
+        Object.entries(question.options).forEach(([key, value]) => {
+            const button = document.createElement('button');
+            button.className = 'option';
+            button.innerHTML = `<strong>${key}.</strong> ${value}`;
+            button.setAttribute('data-option', key);
+            button.addEventListener('click', function() {
+                selectOption(key, button);
+            });
+            optionsContainer.appendChild(button);
+        });
+    }
+    
+    // Hide explanation and reset buttons
+    const explanationContainer = document.getElementById('explanation-container');
+    if (explanationContainer) {
+        explanationContainer.classList.remove('show');
+        explanationContainer.innerHTML = '';
+    }
+    
+    // Show submit button, hide next button
+    const submitBtn = document.getElementById('submit-btn');
+    const nextBtn = document.getElementById('next-btn');
+    if (submitBtn) submitBtn.style.display = 'inline-block';
+    if (nextBtn) nextBtn.style.display = 'none';
+}
+
+// Select option
+function selectOption(optionKey, buttonElement) {
+    console.log('Option selected:', optionKey);
+    
+    // Remove selected class from all options
+    const options = document.querySelectorAll('.option');
+    options.forEach(option => option.classList.remove('selected'));
+    
+    // Add selected class to clicked option
+    buttonElement.classList.add('selected');
+    selectedAnswer = optionKey;
+}
+
+// Submit answer
+function submitAnswer() {
+    console.log('Submitting answer:', selectedAnswer);
+    
+    if (!selectedAnswer) {
+        alert('Please select an answer before submitting.');
+        return;
+    }
+    
+    const question = questions[currentQuestionIndex];
+    const isCorrect = selectedAnswer === question.correct;
+    
+    // Store user answer
+    userAnswers[currentQuestionIndex] = {
+        selected: selectedAnswer,
+        correct: question.correct,
+        isCorrect: isCorrect
+    };
+    
+    // Update score
+    if (isCorrect) {
+        currentScore++;
+        const currentScoreEl = document.getElementById('current-score');
+        if (currentScoreEl) {
+            currentScoreEl.textContent = currentScore;
         }
-      });
-      
-      const label = document.createElement('label');
-      label.htmlFor = checkbox.id;
-      label.textContent = topic;
-      
-      topicDiv.appendChild(checkbox);
-      topicDiv.appendChild(label);
-      topicsContainer.appendChild(topicDiv);
+    }
+    
+    // Disable all options and show results
+    const options = document.querySelectorAll('.option');
+    options.forEach(option => {
+        option.classList.add('disabled');
+        option.style.pointerEvents = 'none';
+        
+        // Get the option key (A, B, C, D)
+        const optionKey = option.getAttribute('data-option');
+        
+        if (optionKey === question.correct) {
+            option.classList.add('correct');
+        } else if (optionKey === selectedAnswer && !isCorrect) {
+            option.classList.add('incorrect');
+        }
     });
     
-    container.appendChild(sectionDiv);
-  });
-  
-  updateRoadmapProgress();
-}
-
-function updateSubjectProgress(subjectIndex, subject) {
-  const sectionDiv = document.querySelector(`[data-subject-index="${subjectIndex}"]`);
-  if (sectionDiv) {
-    const completedTopics = subject.topics.filter(topic => 
-      userProgress.roadmapProgress[`${subject.name}_${topic}`]
-    ).length;
+    // Show explanation
+    const explanationContainer = document.getElementById('explanation-container');
+    if (explanationContainer) {
+        explanationContainer.innerHTML = `
+            <div class="explanation">${question.explanation}</div>
+        `;
+        explanationContainer.classList.add('show');
+    }
     
-    const progressSpan = sectionDiv.querySelector('.subject-progress');
-    if (progressSpan) {
-      progressSpan.textContent = `${completedTopics}/${subject.topics.length} topics`;
-    }
-  }
-}
-
-function updateRoadmapProgress() {
-  const completedTopics = Object.values(userProgress.roadmapProgress).filter(Boolean).length;
-  const totalTopics = APP_DATA.studyRoadmap.subjects.reduce((total, subject) => total + subject.topics.length, 0);
-  const percentage = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
-  
-  document.getElementById('roadmapProgressBar').style.width = percentage + '%';
-  document.getElementById('roadmapProgressText').textContent = percentage + '% Complete';
-}
-
-function initializeResults() {
-  if (userProgress.testHistory.length === 0) {
-    document.querySelector('.analytics-dashboard').innerHTML = 
-      '<div class="text-center"><h3>No test history available</h3><p>Take some mock tests to see your performance analytics.</p></div>';
-    return;
-  }
-  
-  createScoreChart();
-  createSubjectChart();
-  displayResultsTable();
-}
-
-function createScoreChart() {
-  const ctx = document.getElementById('scoreChart').getContext('2d');
-  
-  const data = userProgress.testHistory.map((test, index) => ({
-    x: index + 1,
-    y: test.percentage
-  }));
-  
-  new Chart(ctx, {
-    type: 'line',
-    data: {
-      datasets: [{
-        label: 'Test Scores (%)',
-        data: data,
-        borderColor: '#1FB8CD',
-        backgroundColor: 'rgba(31, 184, 205, 0.1)',
-        tension: 0.4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Score Progress Over Time'
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Test Number'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Score (%)'
-          },
-          min: 0,
-          max: 100
-        }
-      }
-    }
-  });
-}
-
-function createSubjectChart() {
-  const ctx = document.getElementById('subjectChart').getContext('2d');
-  
-  // Aggregate subject-wise performance
-  const subjectPerformance = {};
-  userProgress.testHistory.forEach(test => {
-    Object.entries(test.subjectWise || {}).forEach(([subject, data]) => {
-      if (!subjectPerformance[subject]) {
-        subjectPerformance[subject] = { correct: 0, total: 0 };
-      }
-      subjectPerformance[subject].correct += data.correct;
-      subjectPerformance[subject].total += data.total;
-    });
-  });
-  
-  const subjects = Object.keys(subjectPerformance);
-  const percentages = subjects.map(subject => {
-    const data = subjectPerformance[subject];
-    return data.total > 0 ? Math.round((data.correct / data.total) * 100) : 0;
-  });
-  
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: subjects,
-      datasets: [{
-        label: 'Subject-wise Performance (%)',
-        data: percentages,
-        backgroundColor: ['#1FB8CD', '#FFC185', '#B4413C', '#ECEBD5', '#5D878F', '#DB4545', '#D2BA4C', '#964325']
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: {
-        title: {
-          display: true,
-          text: 'Subject-wise Performance'
-        }
-      },
-      scales: {
-        y: {
-          min: 0,
-          max: 100,
-          title: {
-            display: true,
-            text: 'Accuracy (%)'
-          }
-        }
-      }
-    }
-  });
-}
-
-function displayResultsTable() {
-  const container = document.getElementById('resultsTable');
-  container.innerHTML = `
-    <div class="result-row result-header">
-      <div>Date</div>
-      <div>Score</div>
-      <div>Percentage</div>
-      <div>Time</div>
-    </div>
-  `;
-  
-  userProgress.testHistory.slice(-10).reverse().forEach(test => {
-    const date = new Date(test.date).toLocaleDateString();
-    const minutes = Math.floor(test.timeTaken / 60);
-    const seconds = test.timeTaken % 60;
-    const timeStr = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    // Hide submit button, show next button
+    const submitBtn = document.getElementById('submit-btn');
+    const nextBtn = document.getElementById('next-btn');
     
-    const row = document.createElement('div');
-    row.className = 'result-row';
-    row.innerHTML = `
-      <div>${date}</div>
-      <div>${test.score}/80</div>
-      <div>${test.percentage}%</div>
-      <div>${timeStr}</div>
-    `;
-    container.appendChild(row);
-  });
+    if (submitBtn) submitBtn.style.display = 'none';
+    if (nextBtn) {
+        nextBtn.style.display = 'inline-block';
+        nextBtn.textContent = currentQuestionIndex === questions.length - 1 ? 'View Results' : 'Next Question';
+    }
 }
+
+// Next question
+function nextQuestion() {
+    console.log('Next question clicked, current index:', currentQuestionIndex);
+    
+    if (currentQuestionIndex < questions.length - 1) {
+        currentQuestionIndex++;
+        loadQuestion();
+    } else {
+        showResults();
+    }
+}
+
+// Show results
+function showResults() {
+    console.log('Showing results...');
+    
+    const correctAnswers = currentScore;
+    const percentage = Math.round((correctAnswers / questions.length) * 100);
+    
+    // Update score display
+    const scoreNumberEl = document.getElementById('score-number');
+    const percentageEl = document.getElementById('percentage');
+    
+    if (scoreNumberEl) scoreNumberEl.textContent = correctAnswers;
+    if (percentageEl) percentageEl.textContent = percentage + '%';
+    
+    // Determine performance category based on requirements
+    let performanceCategory, performanceMessage, performanceClass;
+    
+    if (correctAnswers >= 40) {
+        performanceCategory = 'Excellent';
+        performanceMessage = 'Outstanding performance! You have excellent knowledge in Agriculture, Horticulture & Vegetable Science.';
+        performanceClass = 'excellent';
+    } else if (correctAnswers >= 30) {
+        performanceCategory = 'Good';
+        performanceMessage = 'Good job! You have solid understanding of the concepts. Keep practicing for even better results.';
+        performanceClass = 'good';
+    } else if (correctAnswers >= 20) {
+        performanceCategory = 'Average';
+        performanceMessage = 'Average performance. Focus on weak areas and practice more to improve your score.';
+        performanceClass = 'average';
+    } else {
+        performanceCategory = 'Needs Improvement';
+        performanceMessage = 'Needs improvement. Review the fundamentals and practice regularly to enhance your knowledge.';
+        performanceClass = 'needs-improvement';
+    }
+    
+    const performanceBadge = document.getElementById('performance-badge');
+    const performanceMessageEl = document.getElementById('performance-message');
+    
+    if (performanceBadge) {
+        performanceBadge.textContent = performanceCategory;
+        performanceBadge.className = `performance-badge ${performanceClass}`;
+    }
+    
+    if (performanceMessageEl) {
+        performanceMessageEl.textContent = performanceMessage;
+    }
+    
+    showScreen('results-screen');
+}
+
+// Restart test
+function restartTest() {
+    console.log('Restarting test...');
+    currentQuestionIndex = 0;
+    userAnswers = [];
+    currentScore = 0;
+    selectedAnswer = null;
+    startTest();
+}
+
+// Initialize app when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM loaded, initializing app...');
+    initializeApp();
+});
