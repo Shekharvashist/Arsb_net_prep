@@ -1,1 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASRB Mock Test - Agriculture, Horticulture & Vegetable Science</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen active">
+            <div class="welcome-content">
+                <h1>ASRB Mock Test</h1>
+                <h2>Agriculture, Horticulture & Vegetable Science</h2>
+                <div class="test-info">
+                    <div class="info-item">
+                        <strong>Total Questions:</strong> 50
+                    </div>
+                    <div class="info-item">
+                        <strong>Time:</strong> Self-paced
+                    </div>
+                    <div class="info-item">
+                        <strong>Instructions:</strong> Select one answer per question, get immediate feedback with explanations, and track your progress throughout the test.
+                    </div>
+                </div>
+                <button class="btn btn--primary btn--lg" id="start-test-btn">Start Test</button>
+            </div>
+        </div>
 
+        <!-- Test Screen -->
+        <div id="test-screen" class="screen">
+            <div class="test-header">
+                <div class="progress-info">
+                    <span>Question <span id="current-question">1</span> of <span id="total-questions">50</span></span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                </div>
+                <div class="score-info">
+                    Score: <span id="current-score">0</span>/50
+                </div>
+            </div>
+
+            <div class="question-container">
+                <div class="question-text" id="question-text"></div>
+                <div class="options-container" id="options-container"></div>
+                <div class="explanation-container" id="explanation-container"></div>
+                <div class="navigation-container">
+                    <button class="btn btn--primary" id="submit-btn">Submit</button>
+                    <button class="btn btn--primary" id="next-btn" style="display: none;">Next Question</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="results-content">
+                <h1>Test Completed!</h1>
+                <div class="score-display">
+                    <div class="score-circle">
+                        <div class="score-number" id="score-number">0</div>
+                        <div class="score-total">/ 50</div>
+                    </div>
+                    <div class="percentage" id="percentage">0%</div>
+                </div>
+                
+                <div class="performance-analysis">
+                    <div class="performance-badge" id="performance-badge"></div>
+                    <p id="performance-message"></p>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn btn--primary btn--lg" id="restart-btn">Restart Test</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
