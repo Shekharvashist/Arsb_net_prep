@@ -92,10 +92,9 @@
                     <div class="quick-actions">
                         <h3>Quick Actions</h3>
                         <div class="action-buttons">
-                            <a href="mock_test_2/index.html" class="btn btn--primary">Start Mock Test 2</a>
-                            <!-- New Tests Added Below -->
-                            <a href="mock_test_3/index.html" class="btn btn--primary">Start Mock Test 3</a>
-                            <a href="mock_test_4/index.html" class="btn btn--primary">Start Mock Test 4</a>
+                            <button class="btn btn--primary" id="startMockTest2">Start Mock Test 2</button>
+                            <button class="btn btn--primary" id="startMockTest3">Start Mock Test 3</button>
+                            <button class="btn btn--primary" id="startMockTest4">Start Mock Test 4</button>
                             <button class="btn btn--secondary" data-section="roadmap">View Study Roadmap</button>
                             <button class="btn btn--outline" data-section="results">Check Results</button>
                         </div>
@@ -132,11 +131,9 @@
                                     </ul>
                                 </div>
                                 <button class="btn btn--primary btn--lg" id="startTest">Start Test</button>
-                                <!-- If you want to add new daily mock buttons here too, you can! -->
                             </div>
                         </div>
                     </div>
-                    <!-- No changes here: the logic for actual test will be handled in your MockTest3.js & MockTest4.js -->
                     <div class="test-interface hidden" id="testInterface">
                         <div class="test-header">
                             <div class="test-timer">
@@ -283,7 +280,6 @@
                             <canvas id="subjectChart"></canvas>
                         </div>
                     </div>
-
                     <div class="results-history">
                         <h3>Test History</h3>
                         <div class="results-table" id="resultsTable"></div>
@@ -383,7 +379,7 @@
             </div>
         </div>
     </footer>
-    <!-- Add your JS files for new Mock Tests -->
+    <!-- Add MockTest3, MockTest4, and app.js -->
     <script src="MockTest3.js"></script>
     <script src="MockTest4.js"></script>
     <script src="app.js"></script>
