@@ -8,6 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
+    <!-- Header -->
     <header class="header">
         <div class="container">
             <div class="header__content">
@@ -28,7 +29,9 @@
     </header>
 
     <main class="main">
+        <!-- Home Section -->
         <section id="home" class="section active">
+            <!-- Hero Section -->
             <div class="hero">
                 <div class="container">
                     <div class="hero__content">
@@ -55,6 +58,7 @@
                 </div>
             </div>
 
+            <!-- Dashboard -->
             <div class="dashboard">
                 <div class="container">
                     <h2>Your Progress Dashboard</h2>
@@ -88,13 +92,11 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="quick-actions">
                         <h3>Quick Actions</h3>
                         <div class="action-buttons">
-                            <button class="btn btn--primary" id="startMockTest2">Start Mock Test 2</button>
-                            <button class="btn btn--primary" id="startMockTest3">Start Mock Test 3</button>
-                            <button class="btn btn--primary" id="startMockTest4">Start Mock Test 4</button>
+                            <button class="btn btn--primary" data-section="mock-test">Start Daily Mock Test</button>
                             <button class="btn btn--secondary" data-section="roadmap">View Study Roadmap</button>
                             <button class="btn btn--outline" data-section="results">Check Results</button>
                         </div>
@@ -103,9 +105,11 @@
             </div>
         </section>
 
+        <!-- Mock Test Section -->
         <section id="mock-test" class="section">
             <div class="container">
                 <div class="mock-test">
+                    <!-- Test Start Screen -->
                     <div class="test-start" id="testStart">
                         <div class="card">
                             <div class="card__body">
@@ -134,6 +138,8 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Test Interface -->
                     <div class="test-interface hidden" id="testInterface">
                         <div class="test-header">
                             <div class="test-timer">
@@ -144,6 +150,7 @@
                                 Question <span id="currentQuestion">1</span> of 20
                             </div>
                         </div>
+                        
                         <div class="test-content">
                             <div class="question-panel">
                                 <div class="question-info">
@@ -153,15 +160,20 @@
                                 <div class="question-text" id="questionText">
                                     Question will appear here
                                 </div>
-                                <div class="options" id="optionsContainer"></div>
+                                <div class="options" id="optionsContainer">
+                                    <!-- Options will be populated by JavaScript -->
+                                </div>
                                 <div class="question-actions">
                                     <button class="btn btn--secondary" id="markReview">Mark for Review</button>
                                     <button class="btn btn--outline" id="clearResponse">Clear Response</button>
                                 </div>
                             </div>
+                            
                             <div class="question-navigator">
                                 <h4>Question Navigator</h4>
-                                <div class="question-grid" id="questionGrid"></div>
+                                <div class="question-grid" id="questionGrid">
+                                    <!-- Question numbers will be populated by JavaScript -->
+                                </div>
                                 <div class="legend">
                                     <div class="legend-item">
                                         <span class="legend-color answered"></span>
@@ -178,12 +190,15 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="test-controls">
                             <button class="btn btn--outline" id="prevQuestion">Previous</button>
                             <button class="btn btn--outline" id="nextQuestion">Next</button>
                             <button class="btn btn--primary" id="submitTest">Submit Test</button>
                         </div>
                     </div>
+
+                    <!-- Test Results -->
                     <div class="test-results hidden" id="testResults">
                         <div class="card">
                             <div class="card__body">
@@ -202,10 +217,15 @@
                                         <span class="result-value" id="timeTaken">00:00</span>
                                     </div>
                                 </div>
+                                
                                 <div class="performance-chart" style="position: relative; height: 300px;">
                                     <canvas id="performanceChart"></canvas>
                                 </div>
-                                <div class="solutions" id="solutions"></div>
+                                
+                                <div class="solutions" id="solutions">
+                                    <!-- Solutions will be populated by JavaScript -->
+                                </div>
+                                
                                 <div class="result-actions">
                                     <button class="btn btn--primary" id="retakeTest">Take Another Test</button>
                                     <button class="btn btn--secondary" data-section="results">View All Results</button>
@@ -217,6 +237,7 @@
             </div>
         </section>
 
+        <!-- Study Roadmap Section -->
         <section id="roadmap" class="section">
             <div class="container">
                 <h2>24-Week Study Roadmap</h2>
@@ -226,10 +247,14 @@
                     </div>
                     <span class="progress-text" id="roadmapProgressText">0% Complete</span>
                 </div>
-                <div class="roadmap" id="roadmap"></div>
+                
+                <div class="roadmap" id="roadmap">
+                    <!-- Roadmap content will be populated by JavaScript -->
+                </div>
             </div>
         </section>
 
+        <!-- Previous Papers Section -->
         <section id="papers" class="section">
             <div class="container">
                 <h2>Previous Year Papers</h2>
@@ -268,6 +293,7 @@
             </div>
         </section>
 
+        <!-- Results Section -->
         <section id="results" class="section">
             <div class="container">
                 <h2>Performance Analytics</h2>
@@ -280,21 +306,25 @@
                             <canvas id="subjectChart"></canvas>
                         </div>
                     </div>
+                    
                     <div class="results-history">
                         <h3>Test History</h3>
-                        <div class="results-table" id="resultsTable"></div>
+                        <div class="results-table" id="resultsTable">
+                            <!-- Results will be populated by JavaScript -->
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- About Section -->
         <section id="about" class="section">
             <div class="container">
                 <h2>About ASRB NET Hub</h2>
                 <div class="about-content">
                     <div class="about-text">
                         <p>ASRB NET Hub is a comprehensive preparation platform for Agricultural Scientists Recruitment Board National Eligibility Test (ASRB NET) 2025.</p>
-
+                        
                         <h3>Features</h3>
                         <ul>
                             <li>Daily mock tests with 20 questions</li>
@@ -304,7 +334,7 @@
                             <li>Detailed solutions and explanations</li>
                             <li>Mobile-responsive design</li>
                         </ul>
-
+                        
                         <h3>GitHub Deployment Guide</h3>
                         <div class="deployment-guide">
                             <h4>Steps to deploy on GitHub Pages:</h4>
@@ -318,7 +348,7 @@
                             </ol>
                             <p><strong>Note:</strong> Your site will be available at: <code>https://yourusername.github.io/repository-name</code></p>
                         </div>
-
+                        
                         <h3>Exam Tips</h3>
                         <div class="tips-grid">
                             <div class="tip-card">
@@ -344,6 +374,7 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer__content">
@@ -379,9 +410,7 @@
             </div>
         </div>
     </footer>
-    <!-- Add MockTest3, MockTest4, and app.js -->
-    <script src="MockTest3.js"></script>
-    <script src="MockTest4.js"></script>
+
     <script src="app.js"></script>
 </body>
 </html>
