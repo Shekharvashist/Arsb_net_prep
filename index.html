@@ -3,79 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ASRB Mock Test - Agriculture, Horticulture & Vegetable Science</title>
+    <title>ASRB NET 2025 - Preparation Hub</title>
     <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Welcome Screen -->
-        <div id="welcome-screen" class="screen active">
-            <div class="welcome-content">
-                <h1>ASRB Mock Test</h1>
-                <h2>Agriculture, Horticulture & Vegetable Science</h2>
-                <div class="test-info">
-                    <div class="info-item">
-                        <strong>Total Questions:</strong> 50
-                    </div>
-                    <div class="info-item">
-                        <strong>Time:</strong> Self-paced
-                    </div>
-                    <div class="info-item">
-                        <strong>Instructions:</strong> Select one answer per question, get immediate feedback with explanations, and track your progress throughout the test.
-                    </div>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="header__logo">
+                    <h2>🌾 ASRB NET Hub</h2>
                 </div>
-                <button class="btn btn--primary btn--lg" id="start-test-btn">Start Test</button>
+                <nav class="header__nav">
+                    <button class="nav-btn" data-section="home">Home</button>
+                    <button class="nav-btn" data-section="mock-test">Daily Mock</button>
+                    <button class="nav-btn" data-section="roadmap">Study Plan</button>
+                    <button class="nav-btn" data-section="papers">Papers</button>
+                    <button class="nav-btn" data-section="results">Results</button>
+                    <button class="nav-btn" data-section="about">About</button>
+                </nav>
+                <button class="theme-toggle" id="themeToggle">🌙</button>
             </div>
         </div>
+    </header>
 
-        <!-- Test Screen -->
-        <div id="test-screen" class="screen">
-            <div class="test-header">
-                <div class="progress-info">
-                    <span>Question <span id="current-question">1</span> of <span id="total-questions">50</span></span>
+    <main class="main">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <!-- Hero Section -->
+            <div class="hero">
+                <div class="container">
+                    <div class="hero__content">
+                        <h1>ASRB NET 2025 Preparation Hub</h1>
+                        <p>Your complete guide to Agricultural Sciences & Technology examination</p>
+                        <div class="countdown-container">
+                            <h3>Exam Countdown</h3>
+                            <div class="countdown" id="countdown">
+                                <div class="countdown__item">
+                                    <span id="days">0</span>
+                                    <label>Days</label>
+                                </div>
+                                <div class="countdown__item">
+                                    <span id="hours">0</span>
+                                    <label>Hours</label>
+                                </div>
+                                <div class="countdown__item">
+                                    <span id="minutes">0</span>
+                                    <label>Minutes</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard -->
+            <div class="dashboard">
+                <div class="container">
+                    <h2>Your Progress Dashboard</h2>
+                    <div class="dashboard__grid">
+                        <div class="dashboard__card card">
+                            <div class="card__body">
+                                <h3>Tests Completed</h3>
+                                <div class="stat-number" id="testsCompleted">0</div>
+                                <p>Mock tests taken</p>
+                            </div>
+                        </div>
+                        <div class="dashboard__card card">
+                            <div class="card__body">
+                                <h3>Average Score</h3>
+                                <div class="stat-number" id="averageScore">0%</div>
+                                <p>Overall performance</p>
+                            </div>
+                        </div>
+                        <div class="dashboard__card card">
+                            <div class="card__body">
+                                <h3>Study Streak</h3>
+                                <div class="stat-number" id="studyStreak">0</div>
+                                <p>Consecutive days</p>
+                            </div>
+                        </div>
+                        <div class="dashboard__card card">
+                            <div class="card__body">
+                                <h3>Roadmap Progress</h3>
+                                <div class="stat-number" id="roadmapProgress">0%</div>
+                                <p>Study plan completed</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <h3>Quick Actions</h3>
+                        <div class="action-buttons">
+                            <button class="btn btn--primary" data-section="mock-test">Start Daily Mock Test</button>
+                            <button class="btn btn--secondary" data-section="roadmap">View Study Roadmap</button>
+                            <button class="btn btn--outline" data-section="results">Check Results</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mock Test Section -->
+        <section id="mock-test" class="section">
+            <div class="container">
+                <div class="mock-test">
+                    <!-- Test Start Screen -->
+                    <div class="test-start" id="testStart">
+                        <div class="card">
+                            <div class="card__body">
+                                <h2>Daily Mock Test</h2>
+                                <div class="test-info">
+                                    <div class="test-info__item">
+                                        <strong>Questions:</strong> 20
+                                    </div>
+                                    <div class="test-info__item">
+                                        <strong>Duration:</strong> 40 minutes
+                                    </div>
+                                    <div class="test-info__item">
+                                        <strong>Negative Marking:</strong> -1/3 for wrong answers
+                                    </div>
+                                </div>
+                                <div class="test-instructions">
+                                    <h4>Instructions:</h4>
+                                    <ul>
+                                        <li>Each question carries 4 marks</li>
+                                        <li>Wrong answers carry negative marking of 1.33 marks</li>
+                                        <li>You can mark questions for review</li>
+                                        <li>Submit before time expires</li>
+                                    </ul>
+                                </div>
+                                <button class="btn btn--primary btn--lg" id="startTest">Start Test</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Test Interface -->
+                    <div class="test-interface hidden" id="testInterface">
+                        <div class="test-header">
+                            <div class="test-timer">
+                                <span>Time Left: </span>
+                                <span id="timer">40:00</span>
+                            </div>
+                            <div class="question-counter">
+                                Question <span id="currentQuestion">1</span> of 20
+                            </div>
+                        </div>
+                        
+                        <div class="test-content">
+                            <div class="question-panel">
+                                <div class="question-info">
+                                    <span class="subject-tag" id="questionSubject">Subject</span>
+                                    <span class="question-marks">4 Marks</span>
+                                </div>
+                                <div class="question-text" id="questionText">
+                                    Question will appear here
+                                </div>
+                                <div class="options" id="optionsContainer">
+                                    <!-- Options will be populated by JavaScript -->
+                                </div>
+                                <div class="question-actions">
+                                    <button class="btn btn--secondary" id="markReview">Mark for Review</button>
+                                    <button class="btn btn--outline" id="clearResponse">Clear Response</button>
+                                </div>
+                            </div>
+                            
+                            <div class="question-navigator">
+                                <h4>Question Navigator</h4>
+                                <div class="question-grid" id="questionGrid">
+                                    <!-- Question numbers will be populated by JavaScript -->
+                                </div>
+                                <div class="legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color answered"></span>
+                                        <span>Answered</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color review"></span>
+                                        <span>Marked for Review</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color current"></span>
+                                        <span>Current</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="test-controls">
+                            <button class="btn btn--outline" id="prevQuestion">Previous</button>
+                            <button class="btn btn--outline" id="nextQuestion">Next</button>
+                            <button class="btn btn--primary" id="submitTest">Submit Test</button>
+                        </div>
+                    </div>
+
+                    <!-- Test Results -->
+                    <div class="test-results hidden" id="testResults">
+                        <div class="card">
+                            <div class="card__body">
+                                <h2>Test Results</h2>
+                                <div class="results-summary">
+                                    <div class="result-stat">
+                                        <span class="result-label">Score:</span>
+                                        <span class="result-value" id="finalScore">0/80</span>
+                                    </div>
+                                    <div class="result-stat">
+                                        <span class="result-label">Percentage:</span>
+                                        <span class="result-value" id="percentage">0%</span>
+                                    </div>
+                                    <div class="result-stat">
+                                        <span class="result-label">Time Taken:</span>
+                                        <span class="result-value" id="timeTaken">00:00</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="performance-chart" style="position: relative; height: 300px;">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                                
+                                <div class="solutions" id="solutions">
+                                    <!-- Solutions will be populated by JavaScript -->
+                                </div>
+                                
+                                <div class="result-actions">
+                                    <button class="btn btn--primary" id="retakeTest">Take Another Test</button>
+                                    <button class="btn btn--secondary" data-section="results">View All Results</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Study Roadmap Section -->
+        <section id="roadmap" class="section">
+            <div class="container">
+                <h2>24-Week Study Roadmap</h2>
+                <div class="roadmap-progress">
                     <div class="progress-bar">
-                        <div class="progress-fill" id="progress-fill"></div>
+                        <div class="progress-fill" id="roadmapProgressBar" style="width: 0%"></div>
                     </div>
-                </div>
-                <div class="score-info">
-                    Score: <span id="current-score">0</span>/50
-                </div>
-            </div>
-
-            <div class="question-container">
-                <div class="question-text" id="question-text"></div>
-                <div class="options-container" id="options-container"></div>
-                <div class="explanation-container" id="explanation-container"></div>
-                <div class="navigation-container">
-                    <button class="btn btn--primary" id="submit-btn">Submit</button>
-                    <button class="btn btn--primary" id="next-btn" style="display: none;">Next Question</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Results Screen -->
-        <div id="results-screen" class="screen">
-            <div class="results-content">
-                <h1>Test Completed!</h1>
-                <div class="score-display">
-                    <div class="score-circle">
-                        <div class="score-number" id="score-number">0</div>
-                        <div class="score-total">/ 50</div>
-                    </div>
-                    <div class="percentage" id="percentage">0%</div>
+                    <span class="progress-text" id="roadmapProgressText">0% Complete</span>
                 </div>
                 
-                <div class="performance-analysis">
-                    <div class="performance-badge" id="performance-badge"></div>
-                    <p id="performance-message"></p>
-                </div>
-
-                <div class="action-buttons">
-                    <button class="btn btn--primary btn--lg" id="restart-btn">Restart Test</button>
+                <div class="roadmap" id="roadmap">
+                    <!-- Roadmap content will be populated by JavaScript -->
                 </div>
             </div>
+        </section>
+
+        <!-- Previous Papers Section -->
+        <section id="papers" class="section">
+            <div class="container">
+                <h2>Previous Year Papers</h2>
+                <div class="papers-grid">
+                    <div class="paper-card card">
+                        <div class="card__body">
+                            <h3>ASRB NET 2023</h3>
+                            <p>Agricultural Sciences & Technology</p>
+                            <div class="paper-info">
+                                <span>150 Questions</span> • <span>120 Minutes</span>
+                            </div>
+                            <button class="btn btn--primary">Practice Now</button>
+                        </div>
+                    </div>
+                    <div class="paper-card card">
+                        <div class="card__body">
+                            <h3>ASRB NET 2022</h3>
+                            <p>Agricultural Sciences & Technology</p>
+                            <div class="paper-info">
+                                <span>150 Questions</span> • <span>120 Minutes</span>
+                            </div>
+                            <button class="btn btn--primary">Practice Now</button>
+                        </div>
+                    </div>
+                    <div class="paper-card card">
+                        <div class="card__body">
+                            <h3>ASRB NET 2021</h3>
+                            <p>Agricultural Sciences & Technology</p>
+                            <div class="paper-info">
+                                <span>150 Questions</span> • <span>120 Minutes</span>
+                            </div>
+                            <button class="btn btn--primary">Practice Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section id="results" class="section">
+            <div class="container">
+                <h2>Performance Analytics</h2>
+                <div class="analytics-dashboard">
+                    <div class="analytics-charts">
+                        <div class="chart-container" style="position: relative; height: 400px;">
+                            <canvas id="scoreChart"></canvas>
+                        </div>
+                        <div class="chart-container" style="position: relative; height: 400px;">
+                            <canvas id="subjectChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="results-history">
+                        <h3>Test History</h3>
+                        <div class="results-table" id="resultsTable">
+                            <!-- Results will be populated by JavaScript -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="container">
+                <h2>About ASRB NET Hub</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>ASRB NET Hub is a comprehensive preparation platform for Agricultural Scientists Recruitment Board National Eligibility Test (ASRB NET) 2025.</p>
+                        
+                        <h3>Features</h3>
+                        <ul>
+                            <li>Daily mock tests with 20 questions</li>
+                            <li>24-week structured study roadmap</li>
+                            <li>Performance analytics and progress tracking</li>
+                            <li>Previous year question papers</li>
+                            <li>Detailed solutions and explanations</li>
+                            <li>Mobile-responsive design</li>
+                        </ul>
+                        
+                        <h3>GitHub Deployment Guide</h3>
+                        <div class="deployment-guide">
+                            <h4>Steps to deploy on GitHub Pages:</h4>
+                            <ol>
+                                <li>Fork or clone this repository</li>
+                                <li>Go to repository Settings</li>
+                                <li>Navigate to Pages section</li>
+                                <li>Select source as "Deploy from a branch"</li>
+                                <li>Choose "main" branch and "/ (root)" folder</li>
+                                <li>Click Save and your site will be live!</li>
+                            </ol>
+                            <p><strong>Note:</strong> Your site will be available at: <code>https://yourusername.github.io/repository-name</code></p>
+                        </div>
+                        
+                        <h3>Exam Tips</h3>
+                        <div class="tips-grid">
+                            <div class="tip-card">
+                                <h4>📚 Study Strategy</h4>
+                                <p>Focus on previous year question patterns and practice regularly</p>
+                            </div>
+                            <div class="tip-card">
+                                <h4>⏰ Time Management</h4>
+                                <p>Practice with mock tests to improve speed and accuracy</p>
+                            </div>
+                            <div class="tip-card">
+                                <h4>📝 Revision</h4>
+                                <p>Keep revising important formulas and concepts daily</p>
+                            </div>
+                            <div class="tip-card">
+                                <h4>🎯 Accuracy</h4>
+                                <p>Maintain high accuracy to avoid negative marking</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <div class="footer__section">
+                    <h4>ASRB NET Hub</h4>
+                    <p>Your complete preparation partner for ASRB NET 2025</p>
+                </div>
+                <div class="footer__section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#mock-test">Mock Tests</a></li>
+                        <li><a href="#roadmap">Study Plan</a></li>
+                        <li><a href="#results">Results</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="https://icar.org.in" target="_blank">ICAR Official</a></li>
+                        <li><a href="https://asrb.org.in" target="_blank">ASRB Official</a></li>
+                        <li><a href="https://github.com" target="_blank">GitHub Pages</a></li>
+                    </ul>
+                </div>
+                <div class="footer__section">
+                    <h4>Contact</h4>
+                    <p>Built with ❤️ for ASRB NET aspirants</p>
+                    <p>Deploy on GitHub Pages for free hosting</p>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p>&copy; 2025 ASRB NET Hub. Open source project for educational use.</p>
+            </div>
         </div>
-    </div>
+    </footer>
 
     <script src="app.js"></script>
 </body>
