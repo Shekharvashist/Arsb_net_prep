@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASRB NET Vegetable Science Practice Test - 150 Questions</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Welcome Screen -->
+        <div id="welcome-screen" class="screen">
+            <div class="welcome-card">
+                <div class="asrb-header">
+                    <h1>ASRB NET Vegetable Science</h1>
+                    <h2>Practice Test - 150 Questions</h2>
+                </div>
+                <div class="test-info">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <div class="info-icon">📝</div>
+                            <div class="info-content">
+                                <strong>Total Questions:</strong> 150 MCQs
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">⏱️</div>
+                            <div class="info-content">
+                                <strong>Time:</strong> Self-paced practice
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">✅</div>
+                            <div class="info-content">
+                                <strong>Feedback:</strong> Instant answer feedback
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon">📊</div>
+                            <div class="info-content">
+                                <strong>Analysis:</strong> Unit-wise performance tracking
+                            </div>
+                        </div>
+                    </div>
+                    <div class="instructions">
+                        <p><strong>Instructions:</strong></p>
+                        <ul>
+                            <li>Click on your chosen answer option (A, B, C, or D)</li>
+                            <li>Get instant feedback with correct answer highlighted</li>
+                            <li>Navigate through all 150 questions at your own pace</li>
+                            <li>View comprehensive results and unit-wise analysis</li>
+                        </ul>
+                    </div>
+                </div>
+                <button id="start-btn" class="btn btn--primary btn--lg">Start Practice Test</button>
+            </div>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="screen hidden">
+            <div class="quiz-layout">
+                <!-- Main Quiz Area -->
+                <div class="quiz-main">
+                    <!-- Header with Progress -->
+                    <div class="quiz-header">
+                        <div class="progress-section">
+                            <div class="progress-info">
+                                <div class="question-counter">
+                                    <span class="current-q">Question <span id="current-question">1</span> of 150</span>
+                                    <span class="unit-info" id="current-unit">Production Technology of Cool-Season Vegetable Crops</span>
+                                </div>
+                                <div class="progress-stats">
+                                    <span class="score-display">Score: <span id="current-score">0</span>/150 (<span id="current-percentage">0</span>%)</span>
+                                    <span class="progress-percentage"><span id="progress-percent">0</span>% Complete</span>
+                                </div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="progress-fill"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Question Card -->
+                    <div class="question-card">
+                        <div class="question-header">
+                            <div class="question-number">Q<span id="question-number">1</span>.</div>
+                            <h3 id="question-display">Loading question...</h3>
+                        </div>
+                        
+                        <div class="options-container" id="options-container">
+                            <button class="option-btn" data-option="A" id="option-A">
+                                <span class="option-letter">A.</span>
+                                <span class="option-text" id="option-text-A"></span>
+                                <span class="feedback-icon" id="feedback-A"></span>
+                            </button>
+                            <button class="option-btn" data-option="B" id="option-B">
+                                <span class="option-letter">B.</span>
+                                <span class="option-text" id="option-text-B"></span>
+                                <span class="feedback-icon" id="feedback-B"></span>
+                            </button>
+                            <button class="option-btn" data-option="C" id="option-C">
+                                <span class="option-letter">C.</span>
+                                <span class="option-text" id="option-text-C"></span>
+                                <span class="feedback-icon" id="feedback-C"></span>
+                            </button>
+                            <button class="option-btn" data-option="D" id="option-D">
+                                <span class="option-letter">D.</span>
+                                <span class="option-text" id="option-text-D"></span>
+                                <span class="feedback-icon" id="feedback-D"></span>
+                            </button>
+                        </div>
+
+                        <div class="explanation-container" id="explanation-container">
+                            <div class="explanation">
+                                <strong>Explanation:</strong> <span id="explanation-text"></span>
+                            </div>
+                        </div>
+
+                        <div class="navigation">
+                            <button id="prev-btn" class="btn btn--secondary">← Previous</button>
+                            <div class="nav-center">
+                                <span id="remaining-questions">149 questions remaining</span>
+                            </div>
+                            <div class="nav-right">
+                                <button id="next-btn" class="btn btn--primary" disabled>Next →</button>
+                                <button id="finish-btn" class="btn btn--outline">Finish Test</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <div class="quiz-sidebar">
+                    <div class="sidebar-header">
+                        <h4>Unit Progress</h4>
+                        <button class="sidebar-toggle" id="sidebar-toggle">☰</button>
+                    </div>
+                    <div class="sidebar-content" id="sidebar-content">
+                        <div id="units-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen hidden">
+            <div class="results-card">
+                <div class="results-header">
+                    <h1>🎉 Test Completed!</h1>
+                    <div class="completion-badge">
+                        <span>ASRB NET Vegetable Science</span>
+                        <span>Practice Test Results</span>
+                    </div>
+                </div>
+
+                <div class="overall-results">
+                    <div class="score-circle">
+                        <div class="score-inner">
+                            <span class="score-number" id="final-score">0</span>
+                            <span class="score-total">/150</span>
+                        </div>
+                        <div class="score-percentage" id="final-percentage">0%</div>
+                    </div>
+                    
+                    <div class="performance-analysis">
+                        <div class="performance-level" id="performance-level">Good</div>
+                        <div class="performance-description" id="performance-description">
+                            You have a solid understanding of vegetable science concepts. Keep practicing to improve further!
+                        </div>
+                    </div>
+                </div>
+
+                <div class="detailed-results">
+                    <div class="result-stats">
+                        <div class="stat-card correct-stat">
+                            <div class="stat-icon">✅</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="correct-count">0</div>
+                                <div class="stat-label">Correct</div>
+                            </div>
+                        </div>
+                        <div class="stat-card incorrect-stat">
+                            <div class="stat-icon">❌</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="incorrect-count">0</div>
+                                <div class="stat-label">Incorrect</div>
+                            </div>
+                        </div>
+                        <div class="stat-card unanswered-stat">
+                            <div class="stat-icon">⏭️</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="unanswered-count">0</div>
+                                <div class="stat-label">Unanswered</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="unit-performance">
+                    <h3>Unit-wise Performance</h3>
+                    <div id="unit-performance-list" class="performance-list"></div>
+                </div>
+
+                <div class="results-actions">
+                    <button id="review-answers-btn" class="btn btn--primary btn--lg">Review Answers</button>
+                    <button id="restart-test-btn" class="btn btn--secondary btn--lg">Restart Test</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Review Screen -->
+        <div id="review-screen" class="screen hidden">
+            <div class="review-container">
+                <div class="review-header">
+                    <h2>Review Answers</h2>
+                    <div class="review-progress">
+                        <span id="review-current">1</span> of 150
+                    </div>
+                </div>
+                
+                <div class="review-question-card">
+                    <div class="review-question-header">
+                        <div class="question-info">
+                            <span class="review-question-number">Q<span id="review-q-number">1</span>.</span>
+                            <span class="review-unit" id="review-unit">Unit Name</span>
+                        </div>
+                        <div class="answer-status" id="answer-status">
+                            <span class="status-icon">✅</span>
+                            <span class="status-text">Correct</span>
+                        </div>
+                    </div>
+                    
+                    <div class="question-text">
+                        <h3 id="review-question-text">Question text will appear here</h3>
+                    </div>
+                    
+                    <div class="review-options">
+                        <div class="review-option" id="review-option-A">
+                            <span class="option-letter">A.</span>
+                            <span class="option-text" id="review-text-A"></span>
+                            <span class="option-indicators"></span>
+                        </div>
+                        <div class="review-option" id="review-option-B">
+                            <span class="option-letter">B.</span>
+                            <span class="option-text" id="review-text-B"></span>
+                            <span class="option-indicators"></span>
+                        </div>
+                        <div class="review-option" id="review-option-C">
+                            <span class="option-letter">C.</span>
+                            <span class="option-text" id="review-text-C"></span>
+                            <span class="option-indicators"></span>
+                        </div>
+                        <div class="review-option" id="review-option-D">
+                            <span class="option-letter">D.</span>
+                            <span class="option-text" id="review-text-D"></span>
+                            <span class="option-indicators"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="review-explanation">
+                        <strong>Explanation:</strong> <span id="review-explanation-text"></span>
+                    </div>
+                </div>
+
+                <div class="review-navigation">
+                    <button id="review-prev-btn" class="btn btn--secondary">← Previous</button>
+                    <button id="back-to-results-btn" class="btn btn--outline">Back to Results</button>
+                    <button id="review-next-btn" class="btn btn--primary">Next →</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
