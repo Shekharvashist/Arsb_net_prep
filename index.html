@@ -31,6 +31,7 @@
     <main class="main">
         <!-- Home Section -->
         <section id="home" class="section active">
+            <!-- Hero Section -->
             <div class="hero">
                 <div class="container">
                     <div class="hero__content">
@@ -57,6 +58,7 @@
                 </div>
             </div>
 
+            <!-- Dashboard -->
             <div class="dashboard">
                 <div class="container">
                     <h2>Your Progress Dashboard</h2>
@@ -95,8 +97,7 @@
                         <h3>Quick Actions</h3>
                         <div class="action-buttons">
                             <button class="btn btn--primary" data-section="mock-test">Start Daily Mock Test</button>
-                            <a class="btn btn--secondary" href="mocktest2.html" target="_blank">Open Mock Test 2</a>
-                            <button class="btn btn--outline" data-section="roadmap">View Study Roadmap</button>
+                            <button class="btn btn--secondary" data-section="roadmap">View Study Roadmap</button>
                             <button class="btn btn--outline" data-section="results">Check Results</button>
                         </div>
                     </div>
@@ -133,22 +134,104 @@
                                         <li>Submit before time expires</li>
                                     </ul>
                                 </div>
-                                <div style="display: flex; gap: 1rem; justify-content: center;">
-                                    <button class="btn btn--primary btn--lg" id="startTest">Start Main Mock Test</button>
-                                    <a class="btn btn--secondary btn--lg" href="mocktest2.html" target="_blank">Open Mock Test 2</a>
-                                </div>
+                                <button class="btn btn--primary btn--lg" id="startTest">Start Test</button>
                             </div>
                         </div>
                     </div>
 
                     <!-- Test Interface -->
                     <div class="test-interface hidden" id="testInterface">
-                        <!-- Test interface content will be populated by JavaScript -->
+                        <div class="test-header">
+                            <div class="test-timer">
+                                <span>Time Left: </span>
+                                <span id="timer">40:00</span>
+                            </div>
+                            <div class="question-counter">
+                                Question <span id="currentQuestion">1</span> of 20
+                            </div>
+                        </div>
+                        
+                        <div class="test-content">
+                            <div class="question-panel">
+                                <div class="question-info">
+                                    <span class="subject-tag" id="questionSubject">Subject</span>
+                                    <span class="question-marks">4 Marks</span>
+                                </div>
+                                <div class="question-text" id="questionText">
+                                    Question will appear here
+                                </div>
+                                <div class="options" id="optionsContainer">
+                                    <!-- Options will be populated by JavaScript -->
+                                </div>
+                                <div class="question-actions">
+                                    <button class="btn btn--secondary" id="markReview">Mark for Review</button>
+                                    <button class="btn btn--outline" id="clearResponse">Clear Response</button>
+                                </div>
+                            </div>
+                            
+                            <div class="question-navigator">
+                                <h4>Question Navigator</h4>
+                                <div class="question-grid" id="questionGrid">
+                                    <!-- Question numbers will be populated by JavaScript -->
+                                </div>
+                                <div class="legend">
+                                    <div class="legend-item">
+                                        <span class="legend-color answered"></span>
+                                        <span>Answered</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color review"></span>
+                                        <span>Marked for Review</span>
+                                    </div>
+                                    <div class="legend-item">
+                                        <span class="legend-color current"></span>
+                                        <span>Current</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="test-controls">
+                            <button class="btn btn--outline" id="prevQuestion">Previous</button>
+                            <button class="btn btn--outline" id="nextQuestion">Next</button>
+                            <button class="btn btn--primary" id="submitTest">Submit Test</button>
+                        </div>
                     </div>
 
                     <!-- Test Results -->
                     <div class="test-results hidden" id="testResults">
-                        <!-- Test results content will be populated by JavaScript -->
+                        <div class="card">
+                            <div class="card__body">
+                                <h2>Test Results</h2>
+                                <div class="results-summary">
+                                    <div class="result-stat">
+                                        <span class="result-label">Score:</span>
+                                        <span class="result-value" id="finalScore">0/80</span>
+                                    </div>
+                                    <div class="result-stat">
+                                        <span class="result-label">Percentage:</span>
+                                        <span class="result-value" id="percentage">0%</span>
+                                    </div>
+                                    <div class="result-stat">
+                                        <span class="result-label">Time Taken:</span>
+                                        <span class="result-value" id="timeTaken">00:00</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="performance-chart" style="position: relative; height: 300px;">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                                
+                                <div class="solutions" id="solutions">
+                                    <!-- Solutions will be populated by JavaScript -->
+                                </div>
+                                
+                                <div class="result-actions">
+                                    <button class="btn btn--primary" id="retakeTest">Take Another Test</button>
+                                    <button class="btn btn--secondary" data-section="results">View All Results</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,6 +247,7 @@
                     </div>
                     <span class="progress-text" id="roadmapProgressText">0% Complete</span>
                 </div>
+                
                 <div class="roadmap" id="roadmap">
                     <!-- Roadmap content will be populated by JavaScript -->
                 </div>
